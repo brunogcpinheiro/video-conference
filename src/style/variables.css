@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Sen&display=swap");
+
+:root {
+  --font-base: "Sen", sans-serif;
+  --main-color: #0984e3;
+  --white: #fff;
+}
