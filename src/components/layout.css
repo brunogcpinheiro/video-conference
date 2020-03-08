@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Sen&display=swap");
+
+:root {
+  --main-color: #0984e3;
+  --white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: "Sen", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  height: 80px;
+  background-color: var(--main-color);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+header > a {
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  margin: 30px auto;
+  text-align: center;
+}
