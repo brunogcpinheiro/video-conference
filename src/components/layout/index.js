@@ -1,12 +1,12 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import "./layout.css"
+import "./styles.css"
 
 const Layout = ({ children }) => (
   <>
     <header>
-      <Link to='/'>Vídeo Conferência</Link>
+      <Link to="/">Vídeo Conferência</Link>
     </header>
     <main>{children}</main>
   </>

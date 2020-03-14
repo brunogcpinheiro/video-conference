@@ -1,4 +1,4 @@
-@import url("../style/variables.css");
+@import url("../../style/variables.css");
 
 form {
   width: 500px;
@@ -32,4 +32,5 @@ form > button {
   font-weight: bold;
   font-size: 1.025rem;
   margin-top: 20px;
+  letter-spacing: 0.3rem;
 }
