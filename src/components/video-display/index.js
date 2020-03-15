@@ -6,7 +6,7 @@ import useTwilioVideo from "../../hooks/use-twilio-video"
 import "./styles.css"
 
 const VideoDisplay = ({ roomID }) => {
-  const { state, startVideo, videoRef } = useTwilioVideo()
+  const { state, startVideo, leaveRoom, videoRef } = useTwilioVideo()
 
   useEffect(() => {
     if (!state.token) {
@@ -16,11 +16,22 @@ const VideoDisplay = ({ roomID }) => {
     if (!state.room) {
       startVideo()
     }
-  }, [state, roomID, startVideo])
+
+    window.addEventListener("beforeunload", leaveRoom)
+
+    return () => {
+      window.addEventListener("beforeunload", leaveRoom)
+    }
+  }, [state, roomID, startVideo, leaveRoom])
 
   return (
     <>
       <h1>Sala: "{roomID}"</h1>
+      {state.room && (
+        <button className="leave-room" onClick={leaveRoom}>
+          Sair da sala
+        </button>
+      )}
       <div className="chat" ref={videoRef} />
     </>
   )

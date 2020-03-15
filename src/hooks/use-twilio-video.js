@@ -24,6 +24,10 @@ const reducer = (state, action) => {
     case "set-active-room":
       return { ...state, room: action.room }
 
+    case "disconnect":
+      state.room && state.room.disconnect()
+      return INITIAL_STATE
+
     default:
       return INITIAL_STATE
   }
@@ -60,6 +64,42 @@ const useTwilioVideo = () => {
     })
   }
 
+  const handleRemoteParticipant = (container, participant) => {
+    const id = participant.sid
+
+    const el = document.createElement("div")
+    el.id = id
+    el.className = "remote-participant"
+
+    const name = document.createElement("h6")
+    name.innerText = participant.identity
+    el.appendChild(name)
+
+    container.appendChild(el)
+
+    const addTrack = track => {
+      const participantDiv = document.getElementById(id)
+      const media = track.attach()
+
+      participantDiv.appendChild(media)
+    }
+
+    participant.tracks.forEach(publication => {
+      if (publication.isSubscribed) {
+        addTrack(publication.track)
+      }
+    })
+
+    participant.on("trackSubscribed", addTrack)
+
+    participant.on("trackUnsubscribed", track => {
+      track.detach().forEach(el => el.remove())
+
+      const container = document.getElementById(id)
+      if (container) container.remove()
+    })
+  }
+
   const connectToRoom = async () => {
     if (!state.token) {
       return
@@ -83,12 +123,20 @@ const useTwilioVideo = () => {
       videoRef.current.appendChild(localEl)
     }
 
+    const handleParticipant = participant => {
+      handleRemoteParticipant(videoRef.current, participant)
+    }
+
+    room.participants.forEach(handleParticipant)
+    room.on("participantConnected", handleParticipant)
+
     dispatch({ type: "set-active-room", room })
   }
 
   const startVideo = () => connectToRoom()
+  const leaveRoom = () => dispatch({ type: "disconnect" })
 
-  return { state, getRoomToken, startVideo, videoRef }
+  return { state, getRoomToken, startVideo, leaveRoom, videoRef }
 }
 
 export default useTwilioVideo
