@@ -28,7 +28,6 @@ const Join = ({ location }) => {
   return (
     <>
       <h1>Comece ou junte-se à uma sala.</h1>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
       <form onSubmit={handleSubmit}>
         <label htmlFor="identity">Digite seu nome:</label>
         <input

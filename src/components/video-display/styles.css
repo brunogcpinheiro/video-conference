@@ -13,3 +13,20 @@
   border-radius: 8px;
   margin: 10px;
 }
+
+.leave-room {
+  padding: 12px 24px;
+  background: var(--main-color);
+  color: var(--white);
+  margin: 20px 0;
+  font-size: 0.8rem;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  font-family: var(--font-base);
+}
+
+.leave-room:hover {
+  opacity: 0.7;
+}
