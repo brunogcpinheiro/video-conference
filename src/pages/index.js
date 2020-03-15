@@ -3,8 +3,8 @@ import React from "react"
 import Layout from "../components/layout"
 import Join from "../components/join"
 
-export default () => (
+export default ({ location }) => (
   <Layout>
-    <Join />
+    <Join location={location} />
   </Layout>
 )

@@ -1,0 +1,12 @@
+@import url("../../style/variables.css");
+
+.chat {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 60px;
+}
+
+.chat > video {
+  border: 2px solid var(--main-color);
+  border-radius: 8px;
+}
